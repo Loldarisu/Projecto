@@ -12,7 +12,8 @@ import {
 } from 'react-native';
 import styles from './custom/js/styles';
 
-import { default as asheImage, default as splashIcon } from './custom/imgs/game/digimon/splashart/agumon.png';
+import asheImage from './custom/imgs/game/digimon/char/image_1_normal.png';
+import splashIcon from './custom/imgs/game/digimon/splashart/agumon.png';
 
 const { width } = Dimensions.get('window');
 const INPUT_HEIGHT = 48;
