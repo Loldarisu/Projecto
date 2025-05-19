@@ -1,14 +1,13 @@
-// app/(tabs)/trades.tsx
 import { useRouter } from 'expo-router';
 import React from 'react';
 import {
-    Dimensions,
-    Image,
-    Pressable,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
+  Dimensions,
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native';
 import styles from '../custom/js/styles';
 

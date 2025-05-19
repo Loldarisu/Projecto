@@ -11,7 +11,7 @@ export default function LoginScreen() {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
 
   const handleLogin = async () => {
-    // 1) client-side validation (unchanged)
+    // 1) client-side validation
     const newErrors: typeof errors = {};
     if (!email) newErrors.email = 'Email is required.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
@@ -22,32 +22,27 @@ export default function LoginScreen() {
 
     // 2) sign in via Supabase Auth
     const { data: signInData, error: signInError } =
-      await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
+      await supabase.auth.signInWithPassword({ email, password });
     if (signInError) {
       Alert.alert(signInError.message);
       return;
     }
-
     const userId = signInData.user?.id;
     if (!userId) {
       Alert.alert('Could not get user ID from session.');
       return;
     }
 
-    // 3) fetch the user’s row in your `users` table
+    // 3) fetch the user’s row in your `users` table, but allow zero rows
     const { data: profile, error: profileError } = await supabase
       .from('users')
       .select('*')
       .eq('auth_id', userId)
-      .single();
+      .maybeSingle();
 
-    if (profileError) {
+    // Only log *actual* DB errors—ignore “no rows” (PGRST116)
+    if (profileError && profileError.code !== 'PGRST116') {
       console.error('Error loading user profile:', profileError);
-      // still route onward if you wish...
     }
 
     // 4) everything is good → go to your tabs/index
@@ -95,9 +90,7 @@ export default function LoginScreen() {
         <Text>OR</Text>
         <Text style={styles.subtitle}>Connect with</Text>
         <Pressable>
-          <Image
-            source={require('./custom/imgs/menu/googleicon.png')}
-          />
+          <Image source={require('./custom/imgs/menu/googleicon.png')} />
         </Pressable>
 
         <Text style={styles.subtitle}>

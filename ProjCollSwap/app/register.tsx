@@ -17,7 +17,7 @@ export default function RegisterScreen() {
   }>({});
 
   const handleSignUp = async () => {
-    // 1) client-side validation (unchanged)
+    //  client-side validation (unchanged)
     const newErrors: typeof errors = {};
     if (!name.trim()) newErrors.name = 'Name is required.';
     if (!email) newErrors.email = 'Email is required.';
@@ -28,7 +28,7 @@ export default function RegisterScreen() {
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 
-    // 2) sign up with Supabase Auth
+    //  sign up with Supabase Auth
     const { data: signUpData, error: signUpError } =
       await supabase.auth.signUp({
         email,
@@ -40,12 +40,12 @@ export default function RegisterScreen() {
       return;
     }
 
-    // 3) if no session (user must verify by email), inform them
+    //  if no session (user must verify by email), inform them
     if (!signUpData.session) {
       Alert.alert('Please check your inbox for email verification!');
     }
 
-    // 4) now insert a row in your `users` table linking auth_id → your bigint `id`
+    //  now insert a row in your `users` table linking auth_id → your bigint `id`
     //    note: supabase.auth.signUp returns `signUpData.user.id` as a UUID
     const authId = signUpData.user?.id;
     if (authId) {
@@ -68,8 +68,7 @@ export default function RegisterScreen() {
       }
     }
 
-    // 5) navigate to your existing register-success screen
-    router.push('//register-success');
+    router.push('./login.tsx');
   };
 
   return (
