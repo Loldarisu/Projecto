@@ -3,15 +3,14 @@
    ```bash
    npm install
    ```
+   é necessario instalar o node.js no seu dispositivo para usar npm
 
 2. Start the app
 
    ```bash
-   npx expo start
-   or
    npx expo start --tunnel
-
    ```
+   este programa é feito para mobile, será necessario instalar o Expo Go no seu dispositivo para testar.
 
 3. if it doesn't work
 

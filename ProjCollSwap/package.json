@@ -18,7 +18,6 @@
     "@react-navigation/native": "^7.1.6",
     "@supabase/supabase-js": "^2.49.4",
     "bootstrap": "^5.3.6",
-    "eslint-plugin-react-hooks": "^6.1.0-canary-4448b187-20250515",
     "expo": "^53.0.9",
     "expo-blur": "~14.1.4",
     "expo-constants": "~17.1.6",
